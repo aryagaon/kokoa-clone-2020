@@ -1,6 +1,6 @@
 #chat-screen {
   background-color: #abc1d1;
-  height: 11000vh;
+  height: 500vh;
 }
 
 #chat-screen .alt-header,
@@ -21,11 +21,23 @@
   z-index: 1;
 }
 
+@keyframes fadeIn {
+  from{
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+    transform: none;
+  }
+}
+
 .main-chat {
-  margin-top: 120px;
+  margin-top: 180px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  animation: fadeIn 0.3s linear;
 }
 
 .chat__timestamp {
@@ -37,10 +49,21 @@
   margin-bottom: 25px;
 }
 
+@keyframes move-into-right{
+  from{
+    transform: translateX(-200px);
+    opacity: 0;
+  }
+  to{
+    transform: none;
+    opacity: 1;
+  }
+}
 .message-row {
   width: 100%;
   display: flex;
   margin-bottom: 25px;
+  animation: move-into-right 2s ease-in-out;
 }
 
 .message-row img {
@@ -48,6 +71,22 @@
   height: 50px;
   border-radius: 50%;
   margin-right: 15px;
+}
+
+@keyframes heartBeat {
+  0% {
+    transform: none;
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: none;
+  }
+}
+.message-row img:hover {
+  will-chage: transform;
+  animation: heartBeat 1s linear infinite;
 }
 
 .message__author {
@@ -105,6 +144,9 @@
 .reply .reply__column:last-child {
   width: 90%;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 .reply i {
@@ -116,6 +158,8 @@
   width: 100%;
   border: var(--main-border);
   border-radius: 20px;
+  transition: border-box;
+  transition: all .3s ease-in-out;
 }
 
 .reply__column:last-child > i,arya ha ari haei'jly__column:last-child button {
@@ -142,4 +186,24 @@
 .reply__column button:focus,
 .reply__column button:active {
   outline: none;
+}
+
+.reply .reply__column:first-child,
+.reply .fa-smile-wink,
+.reply button{
+  transition: opacity .3s ease-in-out;
+}
+
+.reply:focus-within .reply__column:first-child,
+.reply:focus-within .fa-smile-wink,
+.reply:focus-within button{
+  opacity: 0;
+}
+.reply:focus-within input{
+  width: 98vw;
+  transform: translateX(-13%) translateY(-80px);
+}
+
+.reply:focus-within{
+  transform: translateY(80px);
 }
